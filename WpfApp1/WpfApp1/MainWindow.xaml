@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Login" Height="250" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+
+            <RowDefinition Height="40"/>
+
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Meld je aan" Grid.Row="0" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" FontFamily="Arial Black"/>
+        <Button Content="Register" Grid.Row="0" Grid.ColumnSpan="2" Margin="10" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#FFFF8000" Click="Register" />
+
+
+        <TextBox Name="UsernameTextBox" TextWrapping="Wrap" Text="" Width="120" Grid.Row="1" Margin="10" />
+        <Label Content="Gebruikersnaam:" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+        <PasswordBox Name="PasswordBox" Width="120" Grid.Row="2" Margin="10" />
+        <Label Content="Wachtwoord:" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+        <TextBlock Name="ForgotPasswordTextBlock" Text="" Grid.Row="3" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand"/>
+
+
+        <Button Content="Login" Grid.Row="4" Margin="10,10,75,10" Width="50" HorizontalAlignment="Right" Click="Login"/>
+        <Button Content="Cancel" Grid.Row="4" Margin="10" Width="50" HorizontalAlignment="Right" Click="Cancel"/>
 
     </Grid>
 </Window>
