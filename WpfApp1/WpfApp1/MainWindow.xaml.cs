@@ -21,6 +21,8 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int count = 0; // Move counter to class level
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,12 +32,10 @@ namespace WpfApp1
             Close();
         }
 
-        private void Register(object sender, RoutedEventArgs e)
-        {
-            Register(sender, e);
-        }
+        
         private void Login(object sender, RoutedEventArgs e)
         {
+
             UserManager userManager = new UserManager();
             var username = UsernameTextBox.Text;
             var password = PasswordBox.Password;
@@ -43,7 +43,8 @@ namespace WpfApp1
             // Input validation
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                ForgotPasswordTextBlock.Text = "Please enter both username and password.";
+                count++;
+                ForgotPasswordTextBlock.Text = $"Please enter both username and password. {count}";
                 ForgotPasswordTextBlock.Foreground = Brushes.Red;
                 ForgotPasswordTextBlock.Visibility = Visibility.Visible;
 
@@ -65,13 +66,17 @@ namespace WpfApp1
                 ForgotPasswordTextBlock.Text = "Login correct.";
                 ForgotPasswordTextBlock.Foreground = Brushes.Green;
                 ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+                int count = 0; 
             }
             else
             {
-                ForgotPasswordTextBlock.Text = "Invalid username or password.";
+                count++;
+                ForgotPasswordTextBlock.Text = $"Invalid username or password. Attempts: {count}";
                 ForgotPasswordTextBlock.Foreground = Brushes.Red;
                 ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+
                 PasswordBox.Clear();
+
             }
         }
     }
