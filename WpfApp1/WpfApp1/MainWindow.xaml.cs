@@ -36,12 +36,16 @@ namespace WpfApp1
         private void Login(object sender, RoutedEventArgs e)
         {
 
-            if (count==0)
+            if (count == 0)
             {
-                ForgotPasswordTextBlock.Text = "No more attempts left.";
-                ForgotPasswordTextBlock.Foreground = Brushes.Red;
-                ForgotPasswordTextBlock.Visibility = Visibility.Visible;
-                return;
+                MessageBox.Show(
+                    "No login attempts left.  Application will close.", 
+                    "Error",                                             
+                    MessageBoxButton.OK,                                
+                    MessageBoxImage.Error                                
+                );
+
+                System.Windows.Application.Current.Shutdown();
             }
 
             UserManager userManager = new UserManager();
@@ -87,11 +91,6 @@ namespace WpfApp1
 
             }
         }
-
-        
-
-      
-
         private void naam(object sender, MouseEventArgs e)
         {
             
@@ -110,8 +109,40 @@ namespace WpfApp1
 
         private void register(object sender, RoutedEventArgs e)
         {
-            //gebruik klasse Registration om nieuwe gebruiker te registreren
             UserManager userManager = new UserManager();
+
+            var username = UsernameTextBox.Text;
+            var password = PasswordBox.Password;
+
+            // Validatie
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                ForgotPasswordTextBlock.Text = $"Please enter both username and password. {count}";
+                ForgotPasswordTextBlock.Foreground = Brushes.Red;
+                ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+                return;
+            }
+
+            // Probeer te registreren
+            bool success = userManager.Register(username, password);
+
+            if (success)
+            {
+                
+                ForgotPasswordTextBlock.Text = $"User '{username}' registered successfully!";
+                ForgotPasswordTextBlock.Foreground = Brushes.Green;
+                ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+
+                UsernameTextBox.Clear();
+                PasswordBox.Clear();
+            }
+            else
+            {
+                
+                ForgotPasswordTextBlock.Text = "Username already exists. Please choose another.";
+                ForgotPasswordTextBlock.Foreground = Brushes.Red;
+                ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+            }
         }
     }
 }

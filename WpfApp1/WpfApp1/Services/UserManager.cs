@@ -11,27 +11,47 @@ namespace WpfApp1.Services
 {
     internal class UserManager
     {
+        // Statische lijst om geregistreerde gebruikers bij te houden (blijft bestaan tussen method calls)
+        private static List<Registration> _users = new List<Registration>();
+
         public bool Register(string username, string password)
         {
+            // Check of username al bestaat
+            if (_users.Any(u => u.Username == username))
+            {
+                return false; // Gebruiker bestaat al
+            }
+
             Registration newUser = new Registration
             {
                 Username = username,
                 Password = HashPassword(password)
             };
 
+            _users.Add(newUser);  // Sla de nieuwe gebruiker op
             return true;
         }
 
         public bool Trylogin(Registration credentials)
         {
-            // Hash het ingevoerde wachtwoord EERST, dan vergelijken
-            string hashedInputPassword = HashPassword(credentials.Password);
+            string hashedPassword = HashPassword(credentials.Password);
 
-            if (credentials.Username == "admin" && hashedInputPassword == HashPassword("password"))
+            // Zoek in de lijst van geregistreerde gebruikers
+            var user = _users.FirstOrDefault(u =>
+                u.Username == credentials.Username &&
+                u.Password == hashedPassword);
+
+            // Als geen user gevonden, check ook hardcoded admin account
+            if (user == null)
             {
-                return true;
+                if (credentials.Username == "admin" && hashedPassword == HashPassword("password"))
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+
+            return true;
         }
 
         public string HashPassword(string password)
