@@ -24,7 +24,10 @@ namespace WpfApp1.Services
 
         public bool Trylogin(Registration credentials)
         {
-            if (credentials.Username == "admin" && credentials.Password == HashPassword("password"))
+            // Hash het ingevoerde wachtwoord EERST, dan vergelijken
+            string hashedInputPassword = HashPassword(credentials.Password);
+
+            if (credentials.Username == "admin" && hashedInputPassword == HashPassword("password"))
             {
                 return true;
             }

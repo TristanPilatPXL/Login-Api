@@ -23,13 +23,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Meld je aan" Grid.Row="0" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" FontFamily="Arial Black"/>
-        <Button Content="Register" Grid.Row="0" Grid.ColumnSpan="2" Margin="10" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#FFFF8000"/>
+        <Button Content="Register" Grid.Row="0" Grid.ColumnSpan="2" Margin="10" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#FFFF8000" Click="register"/>
 
-
-        <TextBox Name="UsernameTextBox" TextWrapping="Wrap" Text="" Width="120" Grid.Row="1" Margin="10" />
+        
+        <TextBox Name="UsernameTextBox" TextWrapping="Wrap" Text="" Width="120" Grid.Row="1" Margin="10" GotMouseCapture="naam" />
         <Label Content="Gebruikersnaam:" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
 
-        <PasswordBox Name="PasswordBox" Width="120" Grid.Row="2" Margin="10" />
+        <PasswordBox Name="PasswordBox" Width="120" Grid.Row="2" Margin="10" GotMouseCapture="wachtwoord"/>
         <Label Content="Wachtwoord:" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
 
         <TextBlock Name="ForgotPasswordTextBlock" Text="" Grid.Row="3" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand"/>

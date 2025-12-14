@@ -21,7 +21,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int count = 0; // Move counter to class level
+        private int count = 3; // Move counter to class level
 
         public MainWindow()
         {
@@ -36,6 +36,14 @@ namespace WpfApp1
         private void Login(object sender, RoutedEventArgs e)
         {
 
+            if (count==0)
+            {
+                ForgotPasswordTextBlock.Text = "No more attempts left.";
+                ForgotPasswordTextBlock.Foreground = Brushes.Red;
+                ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+                return;
+            }
+
             UserManager userManager = new UserManager();
             var username = UsernameTextBox.Text;
             var password = PasswordBox.Password;
@@ -43,7 +51,7 @@ namespace WpfApp1
             // Input validation
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                count++;
+                count--;
                 ForgotPasswordTextBlock.Text = $"Please enter both username and password. {count}";
                 ForgotPasswordTextBlock.Foreground = Brushes.Red;
                 ForgotPasswordTextBlock.Visibility = Visibility.Visible;
@@ -70,7 +78,7 @@ namespace WpfApp1
             }
             else
             {
-                count++;
+                count--;
                 ForgotPasswordTextBlock.Text = $"Invalid username or password. Attempts: {count}";
                 ForgotPasswordTextBlock.Foreground = Brushes.Red;
                 ForgotPasswordTextBlock.Visibility = Visibility.Visible;
@@ -78,6 +86,32 @@ namespace WpfApp1
                 PasswordBox.Clear();
 
             }
+        }
+
+        
+
+      
+
+        private void naam(object sender, MouseEventArgs e)
+        {
+            
+            ForgotPasswordTextBlock.Text = "Enter Username.";
+            ForgotPasswordTextBlock.Foreground = Brushes.Gray;
+            ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void wachtwoord(object sender, MouseEventArgs e)
+        {
+
+            ForgotPasswordTextBlock.Text = "Enter Password.";
+            ForgotPasswordTextBlock.Foreground = Brushes.Gray;
+            ForgotPasswordTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void register(object sender, RoutedEventArgs e)
+        {
+            //gebruik klasse Registration om nieuwe gebruiker te registreren
+            UserManager userManager = new UserManager();
         }
     }
 }
